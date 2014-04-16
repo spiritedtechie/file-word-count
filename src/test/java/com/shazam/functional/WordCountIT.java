@@ -6,9 +6,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
@@ -20,28 +20,37 @@ public class WordCountIT {
         // Given
         File testFile = aTestFile("word_count_integration_test.txt");
         // When
-        Process p = runApplication(testFile);
+        Process p = runWordCount(testFile);
         // Then
         assertCompleted(p);
         assertWordCount(9, extractCount(p.getInputStream()));
     }
 
-    private void assertWordCount(final int expectedCount, final int actualCount) throws IOException {
+    @Test
+    public void lineCount() throws Exception {
+        // Given
+        File testFile = aTestFile("word_count_integration_test.txt");
+        // When
+        Process p = runLineCount(testFile);
+        // Then
+        assertCompleted(p);
+        assertLineCount(4, extractCount(p.getInputStream()));
+    }
+
+    private void assertWordCount(int expectedCount, int actualCount) throws Exception {
         assertEquals(expectedCount, actualCount);
     }
 
-    private Process runApplication(final File testFile) throws IOException {
-        File jar = new File("target/word-count-0.0.1-SNAPSHOT.jar");
-        String[] execArgs = new String[] { "java", "-jar", jar.getCanonicalPath(), testFile.getCanonicalPath() };
-        return Runtime.getRuntime().exec(execArgs);
+    private void assertLineCount(int expectedCount, int actualCount) throws Exception {
+        assertEquals(expectedCount, actualCount);
     }
 
-    private void assertCompleted(final Process p) throws InterruptedException {
+    private void assertCompleted(Process p) throws Exception {
         boolean isComplete = p.waitFor(3, TimeUnit.SECONDS);
         assertTrue("Application did not complete", isComplete);
     }
 
-    private int extractCount(final InputStream is) throws IOException {
+    private int extractCount(InputStream is) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         try {
             String output = br.readLine();
@@ -51,4 +60,31 @@ public class WordCountIT {
         }
     }
 
+    private Process runWordCount(File testFile) throws Exception {
+        return runJarApplication(testFile);
+    }
+
+    private Process runLineCount(File testFile) throws Exception {
+        return runJarApplication(testFile, "-l");
+    }
+
+    private Process runJarApplication(File testFile, String... optionalExecArgs) throws Exception {
+        File jar = new File("target/word-count-0.0.1-SNAPSHOT.jar");
+        ArrayList<String> execArgsList =
+                buildExecArgs(jar.getCanonicalPath(), testFile.getCanonicalPath(), optionalExecArgs);
+        return Runtime.getRuntime().exec(execArgsList.toArray(new String[0]));
+    }
+
+    private ArrayList<String> buildExecArgs(String jarFilePath, String testFilePath, String... optionalExecArgs)
+            throws Exception {
+        ArrayList<String> execArgsList = new ArrayList<String>();
+        execArgsList.add("java");
+        execArgsList.add("-jar");
+        execArgsList.add(jarFilePath);
+        for (String optionalArg : optionalExecArgs) {
+            execArgsList.add(optionalArg);
+        }
+        execArgsList.add(testFilePath);
+        return execArgsList;
+    }
 }
