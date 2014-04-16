@@ -5,21 +5,17 @@ import java.util.List;
 
 public class WordCount {
 
-    private final IFileLines fileLines;
+    private final Lines lines;
 
-    public WordCount(final IFileLines fr) {
-        this.fileLines = fr;
+    public WordCount(final Lines lines) {
+        this.lines = lines;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see com.shazam.IFileLines#count()
-     */
     public int count() throws Exception {
-        List<String> lines = fileLines.read();
+        List<String> linesList = lines.get();
 
         int count = 0;
-        for (String line : lines) {
+        for (String line : linesList) {
             count = count + countLineWords(line);
         }
         return count;
@@ -33,8 +29,8 @@ public class WordCount {
 
     public static void main(final String[] args) throws Exception {
         String filePath = args[0];
-        IFileLines fileLines = new FileLines(new File(filePath));
-        WordCount wordCount = new WordCount(fileLines);
+        Lines lines = new FileLines(new File(filePath));
+        WordCount wordCount = new WordCount(lines);
         System.out.println(wordCount.count());
     }
 

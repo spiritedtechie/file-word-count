@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileLines implements IFileLines {
+public class FileLines implements Lines {
 
     public File f;
 
@@ -20,7 +20,7 @@ public class FileLines implements IFileLines {
         if (!f.exists()) throw new IllegalArgumentException("File does not exist");
     }
 
-    public List<String> read() throws Exception {
+    public List<String> get() throws Exception {
         final FileReader fr = new FileReader(f);
         final BufferedReader br = new BufferedReader(fr);
 
