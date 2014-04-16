@@ -1,27 +1,33 @@
 package com.shazam;
 
-import static com.shazam.FileHelper.aTestFile;
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
+import java.util.Arrays;
 
+import org.jmock.Expectations;
+import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class WordCountTest {
 
     @Rule
-    public final ExpectedException exception = ExpectedException.none();
+    public JUnitRuleMockery context = new JUnitRuleMockery();
+
+    Lines linesMock;
+
+    @Before
+    public void setUp() {
+        linesMock = context.mock(Lines.class);
+    }
 
     @Test
-    public void emptyFile_emptyLine() throws Exception {
+    public void oneLine_empty() throws Exception {
         // given
-        File f = aTestFile("empty.txt");
-
+        oneEmptyLine();
         // when
-        int count = countWordsInFile(f);
-
+        int count = countWords();
         // then
         assertWordCount(0, count);
     }
@@ -29,11 +35,9 @@ public class WordCountTest {
     @Test
     public void oneLine_oneWord() throws Exception {
         // given
-        File f = aTestFile("oneline_oneword.txt");
-
+        lines("hello");
         // when
-        int count = countWordsInFile(f);
-
+        int count = countWords();
         // then
         assertWordCount(1, count);
     }
@@ -41,11 +45,9 @@ public class WordCountTest {
     @Test
     public void oneLine_oneWord_whitespaceBeforeLine() throws Exception {
         // given
-        File f = aTestFile("oneline_oneword_whitespaceBefore.txt");
-
+        lines("\thello");
         // when
-        int count = countWordsInFile(f);
-
+        int count = countWords();
         // then
         assertWordCount(1, count);
     }
@@ -53,11 +55,9 @@ public class WordCountTest {
     @Test
     public void oneLine_oneWord_whitespaceAfterLine() throws Exception {
         // given
-        File f = aTestFile("oneline_oneword_whitespaceAfter.txt");
-
+        lines("hello  \t");
         // when
-        int count = countWordsInFile(f);
-
+        int count = countWords();
         // then
         assertWordCount(1, count);
     }
@@ -65,11 +65,9 @@ public class WordCountTest {
     @Test
     public void oneLine_multipleWords_oneWhitespaceSeparating() throws Exception {
         // given
-        File f = aTestFile("oneline_multiplewords_oneWhitespaceSeparating.txt");
-
+        lines("hello there Fred");
         // when
-        int count = countWordsInFile(f);
-
+        int count = countWords();
         // then
         assertWordCount(3, count);
     }
@@ -77,11 +75,9 @@ public class WordCountTest {
     @Test
     public void oneLine_multipleWords_multipleWhitespaceSeparating() throws Exception {
         // given
-        File f = aTestFile("oneline_multiplewords_multipleWhitespaceSeparating.txt");
-
+        lines("hello\tthere          Fred");
         // when
-        int count = countWordsInFile(f);
-
+        int count = countWords();
         // then
         assertWordCount(3, count);
     }
@@ -89,58 +85,32 @@ public class WordCountTest {
     @Test
     public void multipleLines_multipleWords() throws Exception {
         // given
-        File f = aTestFile("multiplelines_multiplewords.txt");
-
+        lines("hello  there          ", " \t  Fred", "how are    you today");
         // when
-        int count = countWordsInFile(f);
-
+        int count = countWords();
         // then
         assertWordCount(7, count);
     }
 
-    @Test
-    public void nullFile() throws Exception {
-        // given
-        File f = noFile();
-
-        // expect
-        expectArgumentExceptionWithMessage("No file supplied");
-
-        // when
-        countWordsInFile(f);
+    private void oneEmptyLine() throws Exception {
+        lines("");
     }
 
-    @Test
-    public void fileDoesNotExist() throws Exception {
-        // given
-        File f = nonExistentFile();
-
-        // expect
-        expectArgumentExceptionWithMessage("File does not exist");
-
-        // when
-        countWordsInFile(f);
-    }
-
-    private void expectArgumentExceptionWithMessage(final String string) {
-        exception.expect(IllegalArgumentException.class);
-        exception.expectMessage(string);
+    private void lines(final String... lines) throws Exception {
+        context.checking(new Expectations() {
+            {
+                oneOf(linesMock).get();
+                will(returnValue(Arrays.asList(lines)));
+            }
+        });
     }
 
     private void assertWordCount(final int expected, final int actual) {
         assertEquals(expected, actual);
     }
 
-    private File noFile() {
-        return null;
-    }
-
-    private File nonExistentFile() {
-        return aTestFile("doesnotexist.txt");
-    }
-
-    private int countWordsInFile(final File f) throws Exception {
-        WordCount wc = new WordCount(new FileLines(f));
+    private int countWords() throws Exception {
+        WordCount wc = new WordCount(linesMock);
         return wc.count();
     }
 
