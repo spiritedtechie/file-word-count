@@ -1,36 +1,27 @@
 package com.shazam;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.util.List;
 
 public class WordCount {
 
-    private final File f;
+    private final IFileLines fileLines;
 
-    public WordCount(final File f) {
-        validateFile(f);
-        this.f = f;
+    public WordCount(final IFileLines fr) {
+        this.fileLines = fr;
     }
 
-    private void validateFile(final File f) {
-        if (f == null) throw new IllegalArgumentException("No file supplied");
-        if (!f.exists()) throw new IllegalArgumentException("File does not exist");
-    }
-
+    /*
+     * (non-Javadoc)
+     * @see com.shazam.IFileLines#count()
+     */
     public int count() throws Exception {
-        final FileReader fr = new FileReader(f);
-        final BufferedReader br = new BufferedReader(fr);
-        int count = 0;
-        try {
-            String line;
-            while ((line = br.readLine()) != null) {
-                count = count + countLineWords(line);
-            }
-        } finally {
-            br.close();
-        }
+        List<String> lines = fileLines.read();
 
+        int count = 0;
+        for (String line : lines) {
+            count = count + countLineWords(line);
+        }
         return count;
     }
 
@@ -42,8 +33,9 @@ public class WordCount {
 
     public static void main(final String[] args) throws Exception {
         String filePath = args[0];
-        WordCount wc = new WordCount(new File(filePath));
-        System.out.println(wc.count());
+        IFileLines fileLines = new FileLines(new File(filePath));
+        WordCount wordCount = new WordCount(fileLines);
+        System.out.println(wordCount.count());
     }
 
 }

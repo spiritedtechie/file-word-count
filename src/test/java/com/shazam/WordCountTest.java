@@ -140,7 +140,7 @@ public class WordCountTest {
     }
 
     private int countWordsInFile(final File f) throws Exception {
-        WordCount wc = new WordCount(f);
+        WordCount wc = new WordCount(new FileLines(f));
         return wc.count();
     }
 
