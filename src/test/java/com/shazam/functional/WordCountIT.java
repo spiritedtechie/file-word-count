@@ -25,7 +25,11 @@ public class WordCountIT {
 
         // Then
         assertCompleted(p);
-        assertEquals(9, extractCount(p.getInputStream()));
+        assertWordCount(9, extractCount(p.getInputStream()));
+    }
+
+    private void assertWordCount(final int expectedCount, final int actualCount) throws IOException {
+        assertEquals(expectedCount, actualCount);
     }
 
     private Process runApplication(final File testFile) throws IOException {
