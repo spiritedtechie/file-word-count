@@ -17,13 +17,10 @@ public class WordCountIT {
 
     @Test
     public void wordCount() throws Exception {
-
         // Given
         File testFile = aTestFile("word_count_integration_test.txt");
-
         // When
         Process p = runApplication(testFile);
-
         // Then
         assertCompleted(p);
         assertWordCount(9, extractCount(p.getInputStream()));
