@@ -105,7 +105,7 @@ public class WordCountTest {
         });
     }
 
-    private void assertWordCount(final int expected, final int actual) {
+    private void assertWordCount(int expected, int actual) {
         assertEquals(expected, actual);
     }
 

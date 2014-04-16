@@ -7,7 +7,7 @@ public class WordCount {
 
     private final Lines lines;
 
-    public WordCount(final Lines lines) {
+    public WordCount(Lines lines) {
         this.lines = lines;
     }
 
@@ -21,13 +21,13 @@ public class WordCount {
         return count;
     }
 
-    private int countLineWords(final String line) {
+    private int countLineWords(String line) {
         String lineTrimmed = line.trim();
         if (!lineTrimmed.isEmpty()) return lineTrimmed.split("\\s+").length;
         else return 0;
     }
 
-    public static void main(final String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         String filePath = args[0];
         Lines lines = new FileLines(new File(filePath));
         WordCount wordCount = new WordCount(lines);

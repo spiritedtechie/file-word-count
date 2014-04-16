@@ -8,21 +8,21 @@ import java.util.List;
 
 public class FileLines implements Lines {
 
-    public File f;
+    private final File f;
 
-    public FileLines(final File f) {
+    public FileLines(File f) {
         validateFile(f);
         this.f = f;
     }
 
-    private void validateFile(final File f) {
+    private void validateFile(File f) {
         if (f == null) throw new IllegalArgumentException("No file supplied");
         if (!f.exists()) throw new IllegalArgumentException("File does not exist");
     }
 
     public List<String> get() throws Exception {
-        final FileReader fr = new FileReader(f);
-        final BufferedReader br = new BufferedReader(fr);
+        FileReader fr = new FileReader(f);
+        BufferedReader br = new BufferedReader(fr);
 
         List<String> lines = new ArrayList<String>();
         try {

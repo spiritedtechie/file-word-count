@@ -33,11 +33,11 @@ public class FilesLinesTest {
         createNewFileLines(f);
     }
 
-    private FileLines createNewFileLines(final File f) {
+    private FileLines createNewFileLines(File f) {
         return new FileLines(f);
     }
 
-    private void expectArgumentExceptionWithMessage(final String string) {
+    private void expectArgumentExceptionWithMessage(String string) {
         exception.expect(IllegalArgumentException.class);
         exception.expectMessage(string);
     }
