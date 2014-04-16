@@ -1,5 +1,6 @@
 package com.shazam.functional;
 
+import static com.shazam.FileHelper.aTestFile;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -18,7 +19,7 @@ public class WordCountIT {
     public void wordCount() throws Exception {
 
         // Given
-        File testFile = new File("src/test/resources/word_count_integration_test.txt");
+        File testFile = aTestFile("word_count_integration_test.txt");
 
         // When
         Process p = runApplication(testFile);

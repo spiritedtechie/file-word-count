@@ -1,5 +1,6 @@
 package com.shazam;
 
+import static com.shazam.FileHelper.aTestFile;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -9,8 +10,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class WordCountTest {
-
-    private static final String TEST_RESOURCES_DIRECTORY = "src/test/resources/";
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -130,10 +129,6 @@ public class WordCountTest {
 
     private void assertWordCount(final int expected, final int actual) {
         assertEquals(expected, actual);
-    }
-
-    private File aTestFile(final String filePath) {
-        return new File(TEST_RESOURCES_DIRECTORY + filePath);
     }
 
     private File noFile() {
