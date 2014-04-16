@@ -39,8 +39,8 @@ public class WordCountIT {
     }
 
     private void assertCompleted(final Process p) throws InterruptedException {
-        boolean didComplete = p.waitFor(3, TimeUnit.SECONDS);
-        assertTrue("Application did not complete", didComplete);
+        boolean isComplete = p.waitFor(3, TimeUnit.SECONDS);
+        assertTrue("Application did not complete", isComplete);
     }
 
     private int extractCount(final InputStream is) throws IOException {
