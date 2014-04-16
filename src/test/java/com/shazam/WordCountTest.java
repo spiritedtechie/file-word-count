@@ -18,7 +18,7 @@ public class WordCountTest {
     @Test
     public void emptyFile_emptyLine() throws Exception {
         // given
-        File f = aFile(testFile("empty.txt"));
+        File f = aTestFile("empty.txt");
 
         // when
         int count = countWordsInFile(f);
@@ -30,7 +30,7 @@ public class WordCountTest {
     @Test
     public void oneLine_oneWord() throws Exception {
         // given
-        File f = aFile(testFile("oneline_oneword.txt"));
+        File f = aTestFile("oneline_oneword.txt");
 
         // when
         int count = countWordsInFile(f);
@@ -42,7 +42,7 @@ public class WordCountTest {
     @Test
     public void oneLine_oneWord_whitespaceBeforeLine() throws Exception {
         // given
-        File f = aFile(testFile("oneline_oneword_whitespaceBefore.txt"));
+        File f = aTestFile("oneline_oneword_whitespaceBefore.txt");
 
         // when
         int count = countWordsInFile(f);
@@ -54,7 +54,7 @@ public class WordCountTest {
     @Test
     public void oneLine_oneWord_whitespaceAfterLine() throws Exception {
         // given
-        File f = aFile(testFile("oneline_oneword_whitespaceAfter.txt"));
+        File f = aTestFile("oneline_oneword_whitespaceAfter.txt");
 
         // when
         int count = countWordsInFile(f);
@@ -66,7 +66,7 @@ public class WordCountTest {
     @Test
     public void oneLine_multipleWords_oneWhitespaceSeparating() throws Exception {
         // given
-        File f = aFile(testFile("oneline_multiplewords_oneWhitespaceSeparating.txt"));
+        File f = aTestFile("oneline_multiplewords_oneWhitespaceSeparating.txt");
 
         // when
         int count = countWordsInFile(f);
@@ -78,7 +78,7 @@ public class WordCountTest {
     @Test
     public void oneLine_multipleWords_multipleWhitespaceSeparating() throws Exception {
         // given
-        File f = aFile(testFile("oneline_multiplewords_multipleWhitespaceSeparating.txt"));
+        File f = aTestFile("oneline_multiplewords_multipleWhitespaceSeparating.txt");
 
         // when
         int count = countWordsInFile(f);
@@ -90,7 +90,7 @@ public class WordCountTest {
     @Test
     public void multipleLines_multipleWords() throws Exception {
         // given
-        File f = aFile(testFile("multiplelines_multiplewords.txt"));
+        File f = aTestFile("multiplelines_multiplewords.txt");
 
         // when
         int count = countWordsInFile(f);
@@ -132,12 +132,8 @@ public class WordCountTest {
         assertEquals(expected, actual);
     }
 
-    private String testFile(final String fileName) {
-        return TEST_RESOURCES_DIRECTORY + fileName;
-    }
-
-    private File aFile(final String filePath) {
-        return new File(filePath);
+    private File aTestFile(final String filePath) {
+        return new File(TEST_RESOURCES_DIRECTORY + filePath);
     }
 
     private File noFile() {
@@ -145,7 +141,7 @@ public class WordCountTest {
     }
 
     private File nonExistentFile() {
-        return aFile(testFile("doesnotexist.txt"));
+        return aTestFile("doesnotexist.txt");
     }
 
     private int countWordsInFile(final File f) throws Exception {
