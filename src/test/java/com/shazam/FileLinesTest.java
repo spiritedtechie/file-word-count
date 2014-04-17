@@ -15,6 +15,7 @@ import org.junit.rules.ExpectedException;
 
 public class FileLinesTest {
 
+    private static final String FILE_LINES_TEST_DIRECTORY = "fileLinesTest/";
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
@@ -41,7 +42,7 @@ public class FileLinesTest {
     @Test
     public void file_oneLine_empty() throws Exception {
         // given
-        File f = aTestFile("fileLinesTest/oneLine_empty.txt");
+        File f = aFileLinesTestFile("/oneLine_empty.txt");
         // when
         List<String> fileLines = getFileLines(f);
         // then
@@ -51,7 +52,7 @@ public class FileLinesTest {
     @Test
     public void file_oneLine_nonEmpty() throws Exception {
         // given
-        File f = aTestFile("fileLinesTest/oneLine_nonEmpty.txt");
+        File f = aFileLinesTestFile("oneLine_nonEmpty.txt");
         // when
         List<String> fileLines = getFileLines(f);
         // then
@@ -61,7 +62,7 @@ public class FileLinesTest {
     @Test
     public void file_multipleLines_allEmpty() throws Exception {
         // given
-        File f = aTestFile("fileLinesTest/multipleLines_allEmpty.txt");
+        File f = aFileLinesTestFile("multipleLines_allEmpty.txt");
         // when
         List<String> fileLines = getFileLines(f);
         // then
@@ -71,7 +72,7 @@ public class FileLinesTest {
     @Test
     public void file_multipleLines_nonEmpty() throws Exception {
         // given
-        File f = aTestFile("fileLinesTest/multipleLines_nonEmpty.txt");
+        File f = aFileLinesTestFile("multipleLines_nonEmpty.txt");
         // when
         List<String> fileLines = getFileLines(f);
         // then
@@ -82,7 +83,7 @@ public class FileLinesTest {
     @Test
     public void file_multipleLines_mixureOfEmptyAndNonEmpty() throws Exception {
         // given
-        File f = aTestFile("fileLinesTest/multipleLines_mixureOfEmptyAndNonEmpty.txt");
+        File f = aFileLinesTestFile("multipleLines_mixureOfEmptyAndNonEmpty.txt");
         // when
         List<String> fileLines = getFileLines(f);
         // then
@@ -99,6 +100,10 @@ public class FileLinesTest {
     private void expectArgumentExceptionWithMessage(String string) {
         exception.expect(IllegalArgumentException.class);
         exception.expectMessage(string);
+    }
+
+    private File aFileLinesTestFile(String string) {
+        return aTestFile(FILE_LINES_TEST_DIRECTORY + string);
     }
 
     private File noFile() {
