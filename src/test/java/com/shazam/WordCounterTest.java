@@ -110,7 +110,7 @@ public class WordCounterTest {
     }
 
     private int countWords() throws Exception {
-        WordCounter wc = new WordCounter(linesMock);
+        Counter wc = new WordCounter(linesMock);
         return wc.count();
     }
 

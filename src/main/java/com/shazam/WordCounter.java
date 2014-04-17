@@ -1,8 +1,9 @@
 package com.shazam;
 
+import java.io.File;
 import java.util.List;
 
-public class WordCounter {
+public class WordCounter implements Counter {
 
     private final Lines lines;
 
@@ -29,11 +30,11 @@ public class WordCounter {
     public static void main(String[] args) throws Exception {
 
         if (args.length == 1) {
-            System.out.println(9);
+            File f = new File(args[0]);
+            WordCounter wc = new WordCounter(new FileLines(f));
+            System.out.println(wc.count());
         } else {
             System.out.println(4);
         }
-
     }
-
 }

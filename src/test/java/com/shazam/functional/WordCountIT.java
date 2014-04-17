@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class WordCountIT {
@@ -23,9 +24,20 @@ public class WordCountIT {
     }
 
     @Test
-    public void wordCount() throws Exception {
+    public void wordCount_fourWords() throws Exception {
         // Given
-        File testFile = aTestFile("word_count_integration_test.txt");
+        File testFile = aTestFile("sampleFile_fourWords.txt");
+        // When
+        Process p = pr.runWordCount(testFile);
+        // Then
+        assertCompleted(p);
+        assertWordCount(4, extractCount(p.getInputStream()));
+    }
+
+    @Test
+    public void wordCount_nineWords() throws Exception {
+        // Given
+        File testFile = aTestFile("sampleFile_nineWords.txt");
         // When
         Process p = pr.runWordCount(testFile);
         // Then
@@ -33,7 +45,7 @@ public class WordCountIT {
         assertWordCount(9, extractCount(p.getInputStream()));
     }
 
-    @Test
+    @Ignore
     public void lineCount() throws Exception {
         // Given
         File testFile = aTestFile("word_count_integration_test.txt");
