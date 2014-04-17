@@ -13,7 +13,7 @@ public class ProcessRunner {
         return runJarApplication(testFile, "-l");
     }
 
-    private Process runJarApplication(File testFile, String... optionalExecArgs) throws Exception {
+    public Process runJarApplication(File testFile, String... optionalExecArgs) throws Exception {
         File jar = new File("target/word-count-0.0.1-SNAPSHOT.jar");
         ArrayList<String> execArgsList =
                 buildExecArgs(jar.getCanonicalPath(), testFile.getCanonicalPath(), optionalExecArgs);

@@ -21,8 +21,7 @@ public class FileLines implements Lines {
     }
 
     public List<String> get() throws Exception {
-        FileReader fr = new FileReader(f);
-        BufferedReader br = new BufferedReader(fr);
+        BufferedReader br = new BufferedReader(new FileReader(f));
         try {
             return buildLines(br);
         } finally {

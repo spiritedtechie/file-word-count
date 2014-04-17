@@ -83,13 +83,23 @@ public class WordCounterTest {
     }
 
     @Test
-    public void multipleLines_multipleWords() throws Exception {
+    public void multipleLines_noBlankLines() throws Exception {
         // given
-        lines("hello there   ", "", " \t  Fred", "how are   you today");
+        lines("hello there   ", " \t  Fred", "how are   you today");
         // when
         int count = countWords();
         // then
         assertWordCount(7, count);
+    }
+
+    @Test
+    public void multipleLines_oneOfTheLinesIsBlank() throws Exception {
+        // given
+        lines("hello there   ", "", "Fred");
+        // when
+        int count = countWords();
+        // then
+        assertWordCount(3, count);
     }
 
     private void emptyLines() throws Exception {
