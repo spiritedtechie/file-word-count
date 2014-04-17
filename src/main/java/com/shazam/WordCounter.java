@@ -3,11 +3,11 @@ package com.shazam;
 import java.io.File;
 import java.util.List;
 
-public class WordCount {
+public class WordCounter {
 
     private final Lines lines;
 
-    public WordCount(Lines lines) {
+    public WordCounter(Lines lines) {
         this.lines = lines;
     }
 

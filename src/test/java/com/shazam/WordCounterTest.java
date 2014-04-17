@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-public class WordCountTest {
+public class WordCounterTest {
 
     @Rule
     public JUnitRuleMockery context = new JUnitRuleMockery();
@@ -110,7 +110,7 @@ public class WordCountTest {
     }
 
     private int countWords() throws Exception {
-        WordCount wc = new WordCount(linesMock);
+        WordCounter wc = new WordCounter(linesMock);
         return wc.count();
     }
 
