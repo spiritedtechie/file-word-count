@@ -42,7 +42,7 @@ public class FileLinesTest {
     @Test
     public void file_oneLine_empty() throws Exception {
         // given
-        File f = aFileLinesTestFile("/oneLine_empty.txt");
+        File f = aFileLinesTestFile("oneLine_empty.txt");
         // when
         List<String> fileLines = getFileLines(f);
         // then
@@ -88,13 +88,12 @@ public class FileLinesTest {
         List<String> fileLines = getFileLines(f);
         // then
         assertThat(fileLines, hasSize(5));
-        assertThat(fileLines, hasItems("hello", "\tfred", "", "hi"));
+        assertThat(fileLines, hasItems("hello", "\t", "\tfred", "", "hi"));
     }
 
     private List<String> getFileLines(File f) throws Exception {
         FileLines fl = new FileLines(f);
-        List<String> fileLines = fl.get();
-        return fileLines;
+        return fl.get();
     }
 
     private void expectArgumentExceptionWithMessage(String string) {
