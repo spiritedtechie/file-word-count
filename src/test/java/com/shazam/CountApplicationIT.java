@@ -1,4 +1,4 @@
-package com.shazam.functional;
+package com.shazam;
 
 import static com.shazam.FileHelper.aTestFile;
 import static java.lang.Integer.parseInt;
@@ -18,13 +18,13 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.Test;
 
-public class WordCountIT {
+public class CountApplicationIT {
 
-    private ProcessRunner pr;
+    private CountApplicationRunner pr;
 
     @Before
     public void setUp() {
-        pr = new ProcessRunner();
+        pr = new CountApplicationRunner();
     }
 
     @Test
@@ -89,7 +89,7 @@ public class WordCountIT {
         assertCompleted(p);
         List<String> output = extractContents(p.getInputStream());
         assertThat(output, hasSize(1));
-        assertEquals("Invalid arguments supplied", output.get(0));
+        assertEquals("Invalid count type argument supplied", output.get(0));
     }
 
     @Test

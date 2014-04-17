@@ -2,6 +2,7 @@ package com.shazam;
 
 public class WordCounter implements Counter {
 
+    private static final String TYPE_CODE = "-w";
     private final Lines lines;
 
     public WordCounter(Lines lines) {
@@ -23,7 +24,7 @@ public class WordCounter implements Counter {
     }
 
     public String getTypeCode() {
-        return "-w";
+        return TYPE_CODE;
     }
 
 }

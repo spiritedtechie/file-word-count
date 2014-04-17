@@ -1,9 +1,9 @@
-package com.shazam.functional;
+package com.shazam;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class ProcessRunner {
+public class CountApplicationRunner {
 
     public Process runWordCount(File testFile) throws Exception {
         return runJarApplication(testFile);

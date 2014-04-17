@@ -23,7 +23,7 @@ public class CountApplication {
         if (counter != null) {
             System.out.println(counter.count());
         } else {
-            System.out.println("Invalid arguments supplied");
+            System.out.println("Invalid count type argument supplied");
         }
     }
 

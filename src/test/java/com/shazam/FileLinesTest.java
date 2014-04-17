@@ -16,6 +16,7 @@ import org.junit.rules.ExpectedException;
 public class FileLinesTest {
 
     private static final String FILE_LINES_TEST_DIRECTORY = "fileLinesTest/";
+
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 

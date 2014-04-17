@@ -2,6 +2,7 @@ package com.shazam;
 
 public class LineCounter implements Counter {
 
+    private static final String TYPE_CODE = "-l";
     private final Lines lines;
 
     public LineCounter(Lines lines) {
@@ -13,7 +14,7 @@ public class LineCounter implements Counter {
     }
 
     public String getTypeCode() {
-        return "-l";
+        return TYPE_CODE;
     }
 
 }
