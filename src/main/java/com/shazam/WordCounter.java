@@ -1,6 +1,5 @@
 package com.shazam;
 
-import java.io.File;
 import java.util.List;
 
 public class WordCounter {
@@ -28,15 +27,13 @@ public class WordCounter {
     }
 
     public static void main(String[] args) throws Exception {
-        
+
         if (args.length == 1) {
             System.out.println(9);
-        }
-        else {
+        } else {
             System.out.println(4);
         }
-        
-        
+
     }
 
 }
