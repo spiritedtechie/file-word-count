@@ -52,6 +52,13 @@ public class LineCounterTest {
         assertEquals(3, count);
     }
 
+    @Test
+    public void testGetTypeCode() {
+        String code = new LineCounter(linesMock).getTypeCode();
+
+        assertEquals("-l", code);
+    }
+
     private int countLines() throws Exception {
         LineCounter lc = new LineCounter(linesMock);
         int count = lc.count();

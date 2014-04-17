@@ -102,6 +102,13 @@ public class WordCounterTest {
         assertWordCount(3, count);
     }
 
+    @Test
+    public void testGetTypeCode() {
+        String code = new WordCounter(linesMock).getTypeCode();
+
+        assertEquals("-w", code);
+    }
+
     private void emptyLines() throws Exception {
         lines();
     }

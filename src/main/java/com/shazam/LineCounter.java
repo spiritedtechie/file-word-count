@@ -12,4 +12,8 @@ public class LineCounter implements Counter {
         return lines.get().size();
     }
 
+    public String getTypeCode() {
+        return "-l";
+    }
+
 }

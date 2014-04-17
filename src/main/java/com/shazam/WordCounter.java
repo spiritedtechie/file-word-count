@@ -1,7 +1,5 @@
 package com.shazam;
 
-import java.io.File;
-
 public class WordCounter implements Counter {
 
     private final Lines lines;
@@ -24,22 +22,8 @@ public class WordCounter implements Counter {
         else return lineTrimmed.split("\\s+").length;
     }
 
-    public static void main(String[] args) throws Exception {
-
-        if (args.length == 1) {
-            File f = new File(args[0]);
-            WordCounter wc = new WordCounter(new FileLines(f));
-            System.out.println(wc.count());
-        } else if (args.length == 2) {
-            if (!"-l".equals(args[0])) {
-                System.out.println("Invalid arguments supplied");
-            } else {
-                File f = new File(args[1]);
-                LineCounter lc = new LineCounter(new FileLines(f));
-                System.out.println(lc.count());
-            }
-        } else {
-            System.out.println("Invalid number of arguments supplied");
-        }
+    public String getTypeCode() {
+        return "-w";
     }
+
 }

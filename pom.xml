@@ -44,7 +44,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.shazam.WordCounter</mainClass>
+							<mainClass>com.shazam.CountApplication</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
