@@ -1,8 +1,13 @@
 package com.shazam;
 
 import static com.shazam.FileHelper.aTestFile;
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.junit.Assert.assertThat;
 
 import java.io.File;
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,13 +19,13 @@ public class FileLinesTest {
     public final ExpectedException exception = ExpectedException.none();
 
     @Test
-    public void nullFile() throws Exception {
+    public void instantiatedWithNullFile() throws Exception {
         // given
         File f = noFile();
         // expect
         expectArgumentExceptionWithMessage("No file supplied");
         // when
-        createNewFileLines(f);
+        getFileLines(f);
     }
 
     @Test
@@ -30,11 +35,65 @@ public class FileLinesTest {
         // expect
         expectArgumentExceptionWithMessage("File does not exist");
         // when
-        createNewFileLines(f);
+        getFileLines(f);
     }
 
-    private FileLines createNewFileLines(File f) {
-        return new FileLines(f);
+    @Test
+    public void file_oneLine_empty() throws Exception {
+        // given
+        File f = aTestFile("fileLinesTest/oneLine_empty.txt");
+        // when
+        List<String> fileLines = getFileLines(f);
+        // then
+        assertThat(fileLines, empty());
+    }
+
+    @Test
+    public void file_oneLine_nonEmpty() throws Exception {
+        // given
+        File f = aTestFile("fileLinesTest/oneLine_nonEmpty.txt");
+        // when
+        List<String> fileLines = getFileLines(f);
+        // then
+        assertThat(fileLines, hasItems("hello\tthere          Fred"));
+    }
+
+    @Test
+    public void file_multipleLines_allEmpty() throws Exception {
+        // given
+        File f = aTestFile("fileLinesTest/multipleLines_allEmpty.txt");
+        // when
+        List<String> fileLines = getFileLines(f);
+        // then
+        assertThat(fileLines, hasItems(""));
+    }
+
+    @Test
+    public void file_multipleLines_nonEmpty() throws Exception {
+        // given
+        File f = aTestFile("fileLinesTest/multipleLines_nonEmpty.txt");
+        // when
+        List<String> fileLines = getFileLines(f);
+        // then
+        assertThat(fileLines, hasSize(4));
+        assertThat(fileLines, hasItems("hello", "\tfred", "\t   how", "    are you"));
+    }
+
+    @Test
+    public void file_multipleLines_mixureOfEmptyAndNonEmpty() throws Exception {
+        // given
+        File f = aTestFile("fileLinesTest/multipleLines_mixureOfEmptyAndNonEmpty.txt");
+        // when
+        List<String> fileLines = getFileLines(f);
+        // then
+        assertThat(fileLines, hasSize(5));
+        assertThat(fileLines, hasItems("hello", "\tfred", "", "hi"));
+    }
+
+    private List<String> getFileLines(File f) throws Exception {
+        FileLines fl = new FileLines(f);
+        List<String> fileLines = fl.get();
+        return fileLines;
     }
 
     private void expectArgumentExceptionWithMessage(String string) {

@@ -21,18 +21,36 @@ public class FileLines implements Lines {
     }
 
     public List<String> get() throws Exception {
-        FileReader fr = new FileReader(f);
-        BufferedReader br = new BufferedReader(fr);
 
         List<String> lines = new ArrayList<String>();
+
+        FileReader fr = new FileReader(f);
+        BufferedReader br = new BufferedReader(fr);
         try {
             String line;
             while ((line = br.readLine()) != null) {
-                lines.add(line);
+                if (line != null) {
+                    lines.add(line);
+                }
             }
         } finally {
             br.close();
         }
+
         return lines;
+
+        // FileReader fr = new FileReader(f);
+        // BufferedReader br = new BufferedReader(fr);
+        //
+        // List<String> lines = new ArrayList<String>();
+        // try {
+        // String line;
+        // while ((line = br.readLine()) != null) {
+        // lines.add(line);
+        // }
+        // } finally {
+        // br.close();
+        // }
+        // return lines;
     }
 }
