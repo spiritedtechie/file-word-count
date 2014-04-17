@@ -23,9 +23,9 @@ public class WordCounterTest {
     }
 
     @Test
-    public void oneLine_empty() throws Exception {
+    public void noLines() throws Exception {
         // given
-        oneEmptyLine();
+        emptyLines();
         // when
         int count = countWords();
         // then
@@ -75,7 +75,7 @@ public class WordCounterTest {
     @Test
     public void oneLine_multipleWords_multipleWhitespaceSeparating() throws Exception {
         // given
-        lines("hello\tthere          Fred");
+        lines("hello\tthere   Fred");
         // when
         int count = countWords();
         // then
@@ -85,15 +85,15 @@ public class WordCounterTest {
     @Test
     public void multipleLines_multipleWords() throws Exception {
         // given
-        lines("hello  there          ", " \t  Fred", "how are    you today");
+        lines("hello there   ", "", " \t  Fred", "how are   you today");
         // when
         int count = countWords();
         // then
         assertWordCount(7, count);
     }
 
-    private void oneEmptyLine() throws Exception {
-        lines("");
+    private void emptyLines() throws Exception {
+        lines();
     }
 
     private void lines(final String... lines) throws Exception {
