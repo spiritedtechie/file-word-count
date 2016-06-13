@@ -3,7 +3,7 @@ Description
 
 This is a simple word count program I created to count the number of words or lines in a supplied file.
 
-It is written using TDD.
+It is written using TDD, and has unit tests and an integration test creating using Junit and JMock.
 
 Setup
 -----
@@ -15,7 +15,7 @@ Setup
 Test
 ---
 
-mvn clean test
+    mvn clean test
 
 Run
 ---
