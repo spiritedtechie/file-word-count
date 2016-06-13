@@ -1,6 +1,6 @@
-package com.shazam;
+package com.spiritedtechie;
 
-import static com.shazam.FileHelper.aTestFile;
+import static com.spiritedtechie.FileHelper.aTestFile;
 import static java.lang.Integer.parseInt;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertEquals;

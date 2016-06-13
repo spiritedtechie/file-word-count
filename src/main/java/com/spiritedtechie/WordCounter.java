@@ -1,4 +1,4 @@
-package com.shazam;
+package com.spiritedtechie;
 
 public class WordCounter implements Counter {
 

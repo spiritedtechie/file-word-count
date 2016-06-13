@@ -1,4 +1,4 @@
-package com.shazam;
+package com.spiritedtechie;
 
 import java.util.List;
 

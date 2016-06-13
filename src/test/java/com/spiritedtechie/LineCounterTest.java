@@ -1,4 +1,4 @@
-package com.shazam;
+package com.spiritedtechie;
 
 import static org.junit.Assert.assertEquals;
 

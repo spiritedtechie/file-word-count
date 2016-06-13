@@ -1,6 +1,6 @@
-package com.shazam;
+package com.spiritedtechie;
 
-import static com.shazam.FileHelper.aTestFile;
+import static com.spiritedtechie.FileHelper.aTestFile;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
