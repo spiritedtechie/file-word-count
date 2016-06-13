@@ -22,7 +22,7 @@ public class CountApplicationRunner {
 
     private ArrayList<String> buildExecArgs(String jarFilePath, String testFilePath, String... optionalExecArgs)
             throws Exception {
-        ArrayList<String> execArgsList = new ArrayList<String>();
+        ArrayList<String> execArgsList = new ArrayList();
         execArgsList.add("java");
         execArgsList.add("-jar");
         execArgsList.add(jarFilePath);

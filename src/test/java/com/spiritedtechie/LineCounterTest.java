@@ -60,8 +60,7 @@ public class LineCounterTest {
     }
 
     private int countLines() throws Exception {
-        LineCounter lc = new LineCounter(linesMock);
-        return lc.count();
+        return new LineCounter(linesMock).count();
     }
 
     private void fileLines(final String... lines) throws Exception {

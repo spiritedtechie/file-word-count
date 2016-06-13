@@ -93,8 +93,7 @@ public class FileLinesTest {
     }
 
     private List<String> getFileLines(File f) throws Exception {
-        FileLines fl = new FileLines(f);
-        return fl.get();
+        return new FileLines(f).get();
     }
 
     private void expectArgumentExceptionWithMessage(String string) {

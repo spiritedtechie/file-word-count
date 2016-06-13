@@ -1,11 +1,7 @@
 package com.spiritedtechie;
 
-import static com.spiritedtechie.FileHelper.aTestFile;
-import static java.lang.Integer.parseInt;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,8 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Before;
-import org.junit.Test;
+import static com.spiritedtechie.FileHelper.aTestFile;
+import static java.lang.Integer.parseInt;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.junit.Assert.*;
 
 public class CountApplicationIT {
 
@@ -119,16 +117,13 @@ public class CountApplicationIT {
     }
 
     private List<String> extractContents(InputStream is) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        List<String> contents = new ArrayList<String>();
-        try {
+        List<String> contents = new ArrayList();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             String line;
             while ((line = br.readLine()) != null) {
                 contents.add(line);
             }
             return contents;
-        } finally {
-            br.close();
         }
     }
 

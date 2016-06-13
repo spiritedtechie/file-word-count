@@ -30,7 +30,7 @@ public class FileLines implements Lines {
     }
 
     private List<String> buildLines(BufferedReader br) throws Exception {
-        List<String> lines = new ArrayList<String>();
+        List<String> lines = new ArrayList();
         String line;
         while ((line = br.readLine()) != null) {
             lines.add(line);

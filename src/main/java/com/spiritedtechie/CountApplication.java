@@ -36,7 +36,7 @@ public class CountApplication {
 
     private static List<Counter> buildCounters(String filePath) {
         File f = new File(filePath);
-        List<Counter> counters = new ArrayList<Counter>();
+        List<Counter> counters = new ArrayList();
         counters.add(new LineCounter(new FileLines(f)));
         counters.add(new WordCounter(new FileLines(f)));
         return counters;
