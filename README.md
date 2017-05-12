@@ -14,14 +14,14 @@ Setup
 
 Test
 ---
-
-    mvn clean test
-
+```
+mvn clean test
+```
 Run
 ---
 
 From the base project directory:
-
-    mvn clean package
-
-    java -jar target/word-count-0.0.1-SNAPSHOT.jar -w src/test/resources/sampleFile_fourLines.txt
+```
+mvn clean package
+java -jar target/word-count-0.0.1-SNAPSHOT.jar -w src/test/resources/sampleFile_fourLines.txt
+```
